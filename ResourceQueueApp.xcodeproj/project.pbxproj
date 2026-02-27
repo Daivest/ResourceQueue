@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4996062E2F51CA33005F2A57 /* ResourceQueue in Frameworks */ = {isa = PBXBuildFile; productRef = 4996062D2F51CA33005F2A57 /* ResourceQueue */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		4996060D2F51C7D7005F2A57 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4996062E2F51CA33005F2A57 /* ResourceQueue in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = ResourceQueueApp;
 			packageProductDependencies = (
+				4996062D2F51CA33005F2A57 /* ResourceQueue */,
 			);
 			productName = ResourceQueueApp;
 			productReference = 499605FF2F51C7D6005F2A57 /* ResourceQueueApp.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 499605F62F51C7D6005F2A57;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4996062C2F51CA33005F2A57 /* XCLocalSwiftPackageReference "ResourceQueue" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 499606002F51C7D6005F2A57 /* Products */;
 			projectDirPath = "";
@@ -578,6 +587,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		4996062C2F51CA33005F2A57 /* XCLocalSwiftPackageReference "ResourceQueue" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ResourceQueue;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4996062D2F51CA33005F2A57 /* ResourceQueue */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ResourceQueue;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 499605F72F51C7D6005F2A57 /* Project object */;
 }

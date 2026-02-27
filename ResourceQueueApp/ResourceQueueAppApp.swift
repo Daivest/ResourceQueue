@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ResourceQueue
 
 @main
 struct ResourceQueueAppApp: App {
