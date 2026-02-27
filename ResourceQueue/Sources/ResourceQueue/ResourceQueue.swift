@@ -165,9 +165,18 @@ public actor ResourceQueue<P: PriorityProtocol, R: Resolver<P>> {
         drain()
     }
 
-    // MARK: - Drain
+    // MARK: - Re-evaluate
 
-    private func drain() {
+    /// Triggers a drain pass, allowing pending tasks to start if conditions have changed.
+    ///
+    /// Call this method when external factors that affect the resolver's decisions
+    /// have changed — for example, updated capacity values in a ``LaneResolver``.
+    ///
+    /// ```swift
+    /// // After updating capacity storage:
+    /// await queue.drain()
+    /// ```
+    public func drain() {
         var toStart: [Int] = []
         let projected = executingCount
 
