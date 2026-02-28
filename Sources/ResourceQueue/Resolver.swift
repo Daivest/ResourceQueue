@@ -14,6 +14,7 @@
 /// ## Built-in Resolvers
 ///
 /// - ``FixedResolver``: Allows a fixed number of concurrent tasks, ignoring priority.
+/// - ``BlockResolver``: Delegates the decision to a caller-provided closure.
 /// - ``LaneResolver``: Divides concurrency into priority-based lanes where
 ///   higher-priority tasks can occupy lower-priority slots.
 ///
@@ -60,5 +61,33 @@ public struct FixedResolver<P: PriorityProtocol>: Resolver, Sendable {
 
     public func shouldStart(executingCount: Int, priority: P) -> Bool {
         executingCount < concurrency
+    }
+}
+
+/// A resolver that delegates the start decision to a closure evaluated at call time.
+///
+/// Use `BlockResolver` when the admission logic depends on external state that may
+/// change between evaluations, and you don't want to create a dedicated ``Resolver`` type.
+///
+/// ```swift
+/// let resolver = BlockResolver<Priority> { executingCount, priority in
+///     executingCount < currentLimit(for: priority)
+/// }
+/// ```
+public struct BlockResolver<P: PriorityProtocol>: Resolver, Sendable {
+
+    private let block: @Sendable (Int, P) -> Bool
+
+    /// Creates a resolver backed by the given closure.
+    ///
+    /// - Parameter block: A closure called each time the queue considers starting a task.
+    ///   Receives the current executing count and the candidate task's priority.
+    ///   Return `true` to allow the task to start.
+    public init(_ block: @escaping @Sendable (Int, P) -> Bool) {
+        self.block = block
+    }
+
+    public func shouldStart(executingCount: Int, priority: P) -> Bool {
+        block(executingCount, priority)
     }
 }
