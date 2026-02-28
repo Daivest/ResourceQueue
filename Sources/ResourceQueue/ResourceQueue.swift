@@ -57,7 +57,10 @@ public actor ResourceQueue<P: PriorityProtocol, R: Resolver<P>> {
     private let pendingLimit: Int
 
     private var pendingTasks: [PendingEntry] = []
-    private var executingCount: Int = 0
+    public private(set) var executingCount: Int = 0
+
+    /// The number of tasks currently waiting to be started.
+    public var pendingCount: Int { pendingTasks.count }
     private var nextID: UInt64 = 0
 
     private var entryStates: [UInt64: EntryState] = [:]
